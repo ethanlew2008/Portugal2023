@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Portugal_2023.PortugalTab"
+            BackgroundColor="White"
+            
+            >
+  <!--Pages can be added as references or inline-->
+    <ContentPage IconImageSource="PortugalPlaneHeader">
+        <StackLayout>
+
+            <Grid VerticalOptions="StartAndExpand" Margin="50,10,0,0">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+
+                <Label x:Name="UKTIME" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="PORTIME" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+                <Label x:Name="TimeLeft" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="PercentLeft" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+                <Label x:Name="Airmode" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="6" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="LocTime" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="6" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+                <Label x:Name="ChargingAir" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="9" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="Co2" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="9" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+
+                <ImageButton x:Name="StartFlight" Grid.Row="12" Grid.Column="0" CornerRadius="160" Source="PortugalStartIcon" HorizontalOptions="CenterAndExpand" Scale="2.5" VerticalOptions="CenterAndExpand" Clicked="StartFlight_Clicked"/>
+                <ImageButton x:Name="UpdateFlight" Grid.Row="12" Grid.Column="1" CornerRadius="160" Source="PortugalRefreshIcon" HorizontalOptions="CenterAndExpand" Scale="2.5" VerticalOptions="CenterAndExpand" Clicked="UpdateFlight_Clicked"/>
+
+
+
+
+
+            </Grid>
+
+            <Grid Margin="0,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+
+
+        </StackLayout>
+    </ContentPage>
+
+
+    <ContentPage IconImageSource="PortugalHouseHeader">
+        <StackLayout>
+            <Grid VerticalOptions="EndAndExpand"  Margin="0,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+
+                <Label x:Name="UKTimeHome" Text="UK Time" Grid.Row="0" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="PORTimeHome" Text="Portugal Time" Grid.Row="0" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="BattLev" Text="Battery Level" Grid.Row="2" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
+                <Label x:Name="Charging" Text="Charging Status" Grid.Row="2" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="DataOnHome" Text="Data On/Off" Grid.Row="4" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="LOCTimeHome" Text="Local Time" Grid.Row="4" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="DateHome" Text="Current Day" Grid.Row="6" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="MonthHome" Text="Current Month" Grid.Row="6" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                <Entry x:Name="CurrencyEUR" Text="" Grid.Row="8" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Start" BackgroundColor="Red" Keyboard="Numeric" TextChanged="CurrencyEUR_TextChanged" MaxLength="10" HorizontalOptions="FillAndExpand"/>
+                <Label x:Name="CurrencyGBP" Text="€" Grid.Row="8" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Start" MaxLines="1"/>
+
+                <ImageButton x:Name="HomeUpdateButton" Source="PortugalRefreshIcon"  BorderWidth="1" CornerRadius="25" Grid.Row="10" Grid.Column="1" HorizontalOptions="CenterAndExpand" Scale="2" Clicked="UpdteHome_Clicked"/>
+                <ImageButton x:Name="SOS" Source="PortugalEmergencyIcon"  BorderWidth="1" CornerRadius="25" Grid.Row="10" Grid.Column="0" HorizontalOptions="CenterAndExpand" Scale="2." Clicked="SOS_Clicked"/>
+
+            </Grid>
+
+            <Label x:Name="AppVer" Text="" Grid.Row="2" TextColor="Black" FontSize="Micro" HorizontalOptions="CenterAndExpand" />
+
+
+
+        </StackLayout>
+
+
+    </ContentPage>
+
+    <ContentPage IconImageSource="PortugalSleepHeader" >
+        <StackLayout>
+
+            <Grid VerticalOptions="StartAndExpand" Margin="50,10,0,0">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+
+                <Label x:Name="UKTimeSleep" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="PORTimeSleep" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+                <Label x:Name="TimeSlept" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="PercentOfSleep" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+                <Label x:Name="DayOfWeek" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="6" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="BattPerSleep" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="6" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+                <Label x:Name="CaloriesBurnt" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="9" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="BreathsTaken" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="9" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+
+
+                <ImageButton x:Name="StartSleep" Grid.Row="12" Grid.Column="0" CornerRadius="160" Source="PortugalStartIcon" HorizontalOptions="CenterAndExpand" Scale="2.5" VerticalOptions="CenterAndExpand" Clicked="StartSleep_Clicked"/>
+                <ImageButton x:Name="UpdateSleep" Grid.Row="12" Grid.Column="1" CornerRadius="160" Source="PortugalRefreshIcon" HorizontalOptions="CenterAndExpand" Scale="2.5" VerticalOptions="CenterAndExpand" Clicked="UpdateSleep_Clicked"/>
+
+
+
+
+
+            </Grid>
+
+            <Grid Margin="0,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+
+
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
