@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using Battery = Xamarin.Essentials.Battery;
 using static Xamarin.Essentials.Permissions;
 using System.Globalization;
+using Java.Security;
 
 namespace Portugal_2023
 {
@@ -19,24 +20,26 @@ namespace Portugal_2023
         Stopwatch flighttimer = new Stopwatch();
         Stopwatch sleeptimer = new Stopwatch();
         APIClient clnt = new APIClient();
+
         public PortugalTab()
         {
             InitializeComponent();
             if ((AppInfo.RequestedTheme == AppTheme.Dark)) { BackgroundColor = Color.DarkRed; } else { BackgroundColor = Color.White; }
             CurrentPage = Children[1];
-            clnt.GetGBP();
+            clnt.GetGBP();            
             UniversialUpdate();
             AppVer.Text = Xamarin.Essentials.VersionTracking.CurrentVersion;
         }
 
-        public void UniversialUpdate()
+        public async void UniversialUpdate()
         {
+            if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };        
             string time = "";
             if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { time = DateTime.UtcNow.ToString("HH:mm"); } else { time = DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
             UKTimeHome.Text = "London: " + time; PORTimeHome.Text = "Lisbon: " + time;
 
-            BattLev.Text = "Battery: " + Convert.ToString(Battery.ChargeLevel * 100) + "%";
-            Charging.Text = Convert.ToString(Battery.State);
+            LONWeather.Text = "London: " + clnt.intcarbLON + "°C";
+            LISWeather.Text =  "Lisbon: " + clnt.intcarb + "°C";
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet && !Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi)) { DataOnHome.Text = "Data On"; } else { DataOnHome.Text = "Data Off"; }
             LOCTimeHome.Text = "LOC: " + DateTime.Now.ToString("HH:mm");
@@ -45,8 +48,7 @@ namespace Portugal_2023
             MonthHome.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
 
             if (flighttimer.IsRunning)
-            {
-                
+            {    
                 if (!flighttimer.IsRunning) { flighttimer.Start(); StartFlight.Source = "PortugalEndIcon"; }
                 try { if (Convert.ToInt32(TimeLeft.Text) <= 0) { flighttimer.Reset(); return; } } catch (Exception) { }
 
@@ -73,7 +75,7 @@ namespace Portugal_2023
                 BreathsTaken.Text = "Breaths: " + Math.Round(15 * sleeptimer.Elapsed.TotalMinutes,0);
             }
 
-
+            if (Connectivity.NetworkAccess == NetworkAccess.None) { DisplayAlert("Notice", "Your Device is offline\nSome App functions may be unavailable", "OK"); LONWeather.Text = "Offline"; LISWeather.Text = "Offline"; }
         }
 
         private void StartFlight_Clicked(object sender, EventArgs e) 

@@ -9,7 +9,7 @@
     <ContentPage IconImageSource="PortugalPlaneHeader">
         <StackLayout>
 
-            <Grid VerticalOptions="StartAndExpand" Margin="50,10,0,0">
+            <Grid VerticalOptions="StartAndExpand" Margin="0,10,0,0">
 
 
                 <Grid.RowDefinitions>
@@ -81,8 +81,8 @@
                 <Label x:Name="UKTimeHome" Text="UK Time" Grid.Row="0" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                 <Label x:Name="PORTimeHome" Text="Portugal Time" Grid.Row="0" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
-                <Label x:Name="BattLev" Text="Battery Level" Grid.Row="2" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
-                <Label x:Name="Charging" Text="Charging Status" Grid.Row="2" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="LONWeather" Text="Offline" Grid.Row="2" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
+                <Label x:Name="LISWeather" Text="Offline" Grid.Row="2" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                 <Label x:Name="DataOnHome" Text="Data On/Off" Grid.Row="4" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                 <Label x:Name="LOCTimeHome" Text="Local Time" Grid.Row="4" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
@@ -110,7 +110,7 @@
     <ContentPage IconImageSource="PortugalSleepHeader" >
         <StackLayout>
 
-            <Grid VerticalOptions="StartAndExpand" Margin="50,10,0,0">
+            <Grid VerticalOptions="StartAndExpand" Margin="0,10,0,0">
 
 
                 <Grid.RowDefinitions>
