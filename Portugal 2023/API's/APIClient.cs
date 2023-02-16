@@ -68,7 +68,7 @@ namespace Portugal_2023
                 HttpResponseMessage rs = await _httpClient.GetAsync(uri);
                 string rsStr = await rs.Content.ReadAsStringAsync();
                 intenseLON = JsonConvert.DeserializeObject<WeatherLON>(rsStr);
-                intcarbLON = intense.current_weather.temperature;
+                intcarbLON = intenseLON.current_weather.temperature;
             }
             catch (Exception ex)
             {

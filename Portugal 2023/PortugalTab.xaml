@@ -91,7 +91,7 @@
                 <Label x:Name="MonthHome" Text="Current Month" Grid.Row="6" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                 <Entry x:Name="CurrencyEUR" Text="" Grid.Row="8" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Start" BackgroundColor="Red" Keyboard="Numeric" TextChanged="CurrencyEUR_TextChanged" MaxLength="10" HorizontalOptions="FillAndExpand"/>
-                <Label x:Name="CurrencyGBP" Text="€" Grid.Row="8" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Start" MaxLines="1"/>
+                <Label x:Name="CurrencyGBP" Text="£" Grid.Row="8" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Start" MaxLines="1"/>
 
                 <ImageButton x:Name="HomeUpdateButton" Source="PortugalRefreshIcon"  BorderWidth="1" CornerRadius="25" Grid.Row="10" Grid.Column="1" HorizontalOptions="CenterAndExpand" Scale="2" Clicked="UpdteHome_Clicked"/>
                 <ImageButton x:Name="SOS" Source="PortugalEmergencyIcon"  BorderWidth="1" CornerRadius="25" Grid.Row="10" Grid.Column="0" HorizontalOptions="CenterAndExpand" Scale="2." Clicked="SOS_Clicked"/>
