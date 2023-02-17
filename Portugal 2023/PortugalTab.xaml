@@ -4,6 +4,7 @@
              x:Class="Portugal_2023.PortugalTab"
             BackgroundColor="White"
             
+            
             >
   <!--Pages can be added as references or inline-->
     <ContentPage IconImageSource="PortugalPlaneHeader">

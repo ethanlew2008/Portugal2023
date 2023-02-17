@@ -11,6 +11,7 @@ using Battery = Xamarin.Essentials.Battery;
 using static Xamarin.Essentials.Permissions;
 using System.Globalization;
 using LocalNotifications.Plugin;
+using System.Threading;
 
 namespace Portugal_2023
 {
@@ -19,9 +20,8 @@ namespace Portugal_2023
     {
         Stopwatch flighttimer = new Stopwatch();
         Stopwatch sleeptimer = new Stopwatch();
-        APIClient clnt = new APIClient();
+        APIClient clnt = new APIClient();  
         bool popup = false;
-
         public PortugalTab()
         {
             InitializeComponent();
@@ -29,9 +29,11 @@ namespace Portugal_2023
             CurrentPage = Children[1];
             clnt.GetGBP();            
             UniversialUpdate();
-            AppVer.Text = Xamarin.Essentials.VersionTracking.CurrentVersion;       
+            AppVer.Text = Xamarin.Essentials.VersionTracking.CurrentVersion;          
         }
 
+
+       
         public async void UniversialUpdate()
         {          
             if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };        
