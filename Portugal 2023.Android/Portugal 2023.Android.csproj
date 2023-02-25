@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -100,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Portugal 2023\Portugal 2023.csproj">
-      <Project>{8786331D-3B71-4363-A6D5-AD5CF38BA454}</Project>
+      <Project>{58630B5B-80A4-4F7D-99D9-EEFD4592C190}</Project>
       <Name>Portugal 2023</Name>
     </ProjectReference>
   </ItemGroup>

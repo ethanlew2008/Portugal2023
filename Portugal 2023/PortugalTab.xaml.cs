@@ -35,8 +35,9 @@ namespace Portugal_2023
 
        
         public async void UniversialUpdate()
-        {          
-            if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };        
+        {
+            if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); }; 
+               
             string time = "";
             if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { time = DateTime.UtcNow.ToString("HH:mm"); } else { time = DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
             UKTimeHome.Text = "London: " + time; PORTimeHome.Text = "Lisbon: " + time;
