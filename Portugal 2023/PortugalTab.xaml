@@ -20,11 +20,11 @@
 
                 </Grid.RowDefinitions>
 
-                <Label x:Name="UKTIME" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="CenterAndExpand"/>
-                <Label x:Name="PORTIME" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="UKTIME" Text="{Binding Time}" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" HorizontalOptions="CenterAndExpand" Opacity="0"/>
+                <Label x:Name="PORTIME" Text="{Binding TimeL}" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" Opacity="0"/>
 
                 <Label x:Name="TimeLeft" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" HorizontalOptions="CenterAndExpand"/>
-                <Label x:Name="PercentLeft" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="PercentLeft" Text="{Binding Pcta}" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
 
                 <Label x:Name="Airmode" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="6" HorizontalOptions="CenterAndExpand"/>
                 <Label x:Name="LocTime" Text="" TextColor="Black" FontSize="Title" FontAttributes="Bold" Grid.Row="6" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
@@ -79,14 +79,14 @@
 
 
 
-                <Label x:Name="UKTimeHome" Text="UK Time" Grid.Row="0" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                <Label x:Name="PORTimeHome" Text="Portugal Time" Grid.Row="0" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="UKTimeHome" Text="{Binding Time}" Grid.Row="0" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                <Label x:Name="PORTimeHome" Text="{Binding TimeL}" Grid.Row="0" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                 <Label x:Name="LONWeather" Text="Offline" Grid.Row="2" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
                 <Label x:Name="LISWeather" Text="Offline" Grid.Row="2" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                 <Label x:Name="DataOnHome" Text="Data On/Off" Grid.Row="4" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                <Label x:Name="LOCTimeHome" Text="Local Time" Grid.Row="4" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="LOCTimeHome" Text="{Binding LOC}" Grid.Row="4" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
                 <Label x:Name="DateHome" Text="Current Day" Grid.Row="6" Grid.Column="0" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                 <Label x:Name="MonthHome" Text="Current Month" Grid.Row="6" Grid.Column="1" TextColor="Black" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center"/>

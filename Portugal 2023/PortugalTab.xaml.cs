@@ -12,15 +12,19 @@ using static Xamarin.Essentials.Permissions;
 using System.Globalization;
 using LocalNotifications.Plugin;
 using System.Threading;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Portugal_2023
 {
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PortugalTab : TabbedPage
     {
-        Stopwatch flighttimer = new Stopwatch();
-        Stopwatch sleeptimer = new Stopwatch();
-        APIClient clnt = new APIClient();  
+        public static Stopwatch flighttimer = new Stopwatch();
+        public static Stopwatch sleeptimer = new Stopwatch();
+        APIClient clnt = new APIClient();
+        
+       
         bool popup = false;
         public PortugalTab()
         {
@@ -28,7 +32,8 @@ namespace Portugal_2023
             if ((AppInfo.RequestedTheme == AppTheme.Dark)) { BackgroundColor = Color.DarkRed; } else { BackgroundColor = Color.White; }
             CurrentPage = Children[1];
             clnt.GetGBP();            
-            UniversialUpdate();
+            UniversialUpdate();          
+            BindingContext = new timeVM();
             AppVer.Text = Xamarin.Essentials.VersionTracking.CurrentVersion;          
         }
 
@@ -36,31 +41,32 @@ namespace Portugal_2023
        
         public async void UniversialUpdate()
         {
-            if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); }; 
-               
+
+            if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };
+
             string time = "";
             if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { time = DateTime.UtcNow.ToString("HH:mm"); } else { time = DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
-            UKTimeHome.Text = "London: " + time; PORTimeHome.Text = "Lisbon: " + time;
 
             LONWeather.Text = "London: " + clnt.intcarbLON + "°C";
             LISWeather.Text =  "Lisbon: " + clnt.intcarb + "°C";
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet && !Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi)) { DataOnHome.Text = "Data On"; } else { DataOnHome.Text = "Data Off"; }
-            LOCTimeHome.Text = "LOC: " + DateTime.Now.ToString("HH:mm");
 
             DateHome.Text = DateTime.Now.DayOfWeek.ToString();
             MonthHome.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
 
             if (flighttimer.IsRunning)
-            {    
+            {
+                UKTIME.Opacity = 1;
+                PORTIME.Opacity = 1;
+
                 if (!flighttimer.IsRunning) { flighttimer.Start(); StartFlight.Source = "PortugalEndIcon"; }
                 try { if (Convert.ToInt32(TimeLeft.Text) <= 0) { flighttimer.Reset(); return; } } catch (Exception) { }
 
                 if (Connectivity.NetworkAccess == NetworkAccess.None) { Airmode.Text = "Airmode: On"; } else { Airmode.Text = "Airmode: Off"; }
                 ChargingAir.Text = Battery.State.ToString();
-                LocTime.Text = "LOC: " + DateTime.Now.ToString("HH:mm");
-                UKTIME.Text = "London: " + time; PORTIME.Text = "Lisbon: " + time;
-                PercentLeft.Text = "" + Convert.ToInt32(100 - (flighttimer.Elapsed.TotalMinutes / 147) * 100) + "% left";
+
+                
                 TimeLeft.Text = Convert.ToString(Convert.ToInt32(85 - flighttimer.Elapsed.TotalMinutes)) + " Mins";
                 Co2.Text = Convert.ToString(Math.Round(flighttimer.Elapsed.TotalMinutes * 5.529, 1)) + "KG CO2";
             }
