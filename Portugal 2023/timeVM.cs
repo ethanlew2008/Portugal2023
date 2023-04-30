@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Xamarin.Essentials;
 
 namespace Portugal_2023
 {
@@ -12,7 +13,7 @@ namespace Portugal_2023
         {
             // Start the time updater thread when the ViewModel is created
             StartUpdaterThread();
-            FlightUpdateBind();
+            FlightUpdateThread();
         }
 
 
@@ -72,6 +73,61 @@ namespace Portugal_2023
         }
         private static string pcta;
 
+        public string Fltm
+        {
+            get { return fltm; }
+            set
+            {
+                if (fltm != value)
+                {
+                    fltm = value;
+                    OnPropertyChange("Fltm");
+                }
+            }
+        }
+        private static string fltm;
+
+        public string Airmd
+        {
+            get { return airmd; }
+            set
+            {
+                if (airmd != value)
+                {
+                    airmd = value;
+                    OnPropertyChange("Airmd");
+                }
+            }
+        }
+        private static string airmd;
+
+        public string Aircg
+        {
+            get { return aircg; }
+            set
+            {
+                if (aircg != value)
+                {
+                    aircg = value;
+                    OnPropertyChange("Aircg");
+                }
+            }
+        }
+        private static string aircg;
+
+        public string Cbn
+        {
+            get { return cbn; }
+            set
+            {
+                if (cbn != value)
+                {
+                    cbn = value;
+                    OnPropertyChange("Cbn");
+                }
+            }
+        }
+        private static string cbn;
 
         private void StartUpdaterThread()
         {
@@ -87,14 +143,22 @@ namespace Portugal_2023
                 }
             }).Start();
         }
-        public void FlightUpdateBind()
+        public void FlightUpdateThread()
         {
             // Start a new thread that updates the Time property every second
             new Thread(() =>
             {
                 while (true)
                 {
-                    if(PortugalTab.flighttimer.IsRunning) { Pcta= "" + Convert.ToInt32(100 - (PortugalTab.flighttimer.Elapsed.TotalMinutes / 147) * 100) + "% left"; }
+                    if (PortugalTab.flighttimer.IsRunning)
+                    {
+                        Pcta = Convert.ToInt32(100 - (PortugalTab.flighttimer.Elapsed.TotalMinutes / 85) * 100) + "% left";
+                        Fltm = Convert.ToString(Convert.ToInt32(85 - PortugalTab.flighttimer.Elapsed.TotalMinutes)) + " Mins";
+                        if (Connectivity.NetworkAccess == NetworkAccess.None) { Airmd = "Airmode: On"; } else { Airmd = "Airmode: Off"; }
+                        Aircg = Battery.State.ToString();
+                        Cbn= Convert.ToString(Math.Round(PortugalTab.flighttimer.Elapsed.TotalMinutes * 5.529, 1)) + "KG CO2";
+
+                    }
                     Thread.Sleep(1000);
                 }
             }).Start();

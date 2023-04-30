@@ -39,10 +39,11 @@ namespace Portugal_2023
 
 
        
-        public async void UniversialUpdate()
+
+        public void UniversialUpdate()
         {
 
-            if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };
+            //if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };
 
             string time = "";
             if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { time = DateTime.UtcNow.ToString("HH:mm"); } else { time = DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
@@ -54,22 +55,6 @@ namespace Portugal_2023
 
             DateHome.Text = DateTime.Now.DayOfWeek.ToString();
             MonthHome.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
-
-            if (flighttimer.IsRunning)
-            {
-                UKTIME.Opacity = 1;
-                PORTIME.Opacity = 1;
-
-                if (!flighttimer.IsRunning) { flighttimer.Start(); StartFlight.Source = "PortugalEndIcon"; }
-                try { if (Convert.ToInt32(TimeLeft.Text) <= 0) { flighttimer.Reset(); return; } } catch (Exception) { }
-
-                if (Connectivity.NetworkAccess == NetworkAccess.None) { Airmode.Text = "Airmode: On"; } else { Airmode.Text = "Airmode: Off"; }
-                ChargingAir.Text = Battery.State.ToString();
-
-                
-                TimeLeft.Text = Convert.ToString(Convert.ToInt32(85 - flighttimer.Elapsed.TotalMinutes)) + " Mins";
-                Co2.Text = Convert.ToString(Math.Round(flighttimer.Elapsed.TotalMinutes * 5.529, 1)) + "KG CO2";
-            }
 
             if (sleeptimer.IsRunning)
             {
@@ -91,9 +76,8 @@ namespace Portugal_2023
         private void StartFlight_Clicked(object sender, EventArgs e) 
         {
             if (flighttimer.IsRunning) { flighttimer.Reset(); StartFlight.Source = "PortugalStartIcon"; return; }            
-            else { flighttimer.Start(); StartFlight.Source = "PortugalEndIcon"; UniversialUpdate(); }                  
-        }
-        private void UpdateFlight_Clicked(object sender, EventArgs e) { if (flighttimer.IsRunning) { UniversialUpdate(); } }     
+            else { flighttimer.Start(); StartFlight.Source = "PortugalEndIcon"; UniversialUpdate(); UKTIME.Opacity = 1; PORTIME.Opacity = 1; LocTime.Opacity = 1; }                  
+        }     
         private void StartSleep_Clicked(object sender, EventArgs e)
         {
             if (sleeptimer.IsRunning) { sleeptimer.Reset(); StartSleep.Source = "PortugalStartIcon"; return; }
