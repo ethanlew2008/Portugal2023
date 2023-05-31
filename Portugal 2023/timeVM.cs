@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using Xamarin.Essentials;
 
+
 namespace Portugal_2023
 {
     
@@ -115,6 +116,20 @@ namespace Portugal_2023
         }
         private static string aircg;
 
+        public string Bckclr
+        {
+            get { return bckclr; }
+            set
+            {
+                if (bckclr != value)
+                {
+                    bckclr = value;
+                    OnPropertyChange("Bckclr");
+                }
+            }
+        }
+        private static string bckclr;
+
         public string Cbn
         {
             get { return cbn; }
@@ -139,6 +154,7 @@ namespace Portugal_2023
                     if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { Time = "London: " + DateTime.UtcNow.ToString("HH:mm"); } else { Time = "London: " + DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
                     if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { TimeL = "Lisbon: " + DateTime.UtcNow.ToString("HH:mm"); } else { TimeL = "Lisbon: " + DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
                     LOC = "LOC: " + DateTime.Now.ToString("HH:mm");
+                    if ((AppInfo.RequestedTheme == AppTheme.Dark)) { Bckclr = "DarkRed"; } else { Bckclr = "White"; }
                     Thread.Sleep(1000);
                 }
             }).Start();
@@ -157,6 +173,7 @@ namespace Portugal_2023
                         if (Connectivity.NetworkAccess == NetworkAccess.None) { Airmd = "Airmode: On"; } else { Airmd = "Airmode: Off"; }
                         Aircg = Battery.State.ToString();
                         Cbn= Convert.ToString(Math.Round(PortugalTab.flighttimer.Elapsed.TotalMinutes * 5.529, 1)) + "KG CO2";
+                        
 
                     }
                     Thread.Sleep(1000);
