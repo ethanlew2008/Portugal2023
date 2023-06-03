@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using Xamarin.Essentials;
@@ -144,6 +146,119 @@ namespace Portugal_2023
         }
         private static string cbn;
 
+        public string Day
+        {
+            get { return day; }
+            set
+            {
+                if (day!= value)
+                {
+                    day = value;
+                    OnPropertyChange("Day");
+                }
+            }
+        }
+        private static string day;
+
+        public string Month
+        {
+            get { return month; }
+            set
+            {
+                if (month != value)
+                {
+                    month = value;
+                    OnPropertyChange("Month");
+                }
+            }
+        }
+        private static string month;
+
+        public string Data
+        {
+            get { return data; }
+            set
+            {
+                if (data != value)
+                {
+                    data = value;
+                    OnPropertyChange("Data");
+                }
+            }
+        }
+        private static string data;
+
+        public string Sleeptime
+        {
+            get { return sleeptime; }
+            set
+            {
+                if (sleeptime != value)
+                {
+                    sleeptime = value;
+                    OnPropertyChange("Sleeptime");
+                }
+            }
+        }
+        private static string sleeptime;
+
+        public string Pecsleep
+        {
+            get { return pecsleep; }
+            set
+            {
+                if (pecsleep != value)
+                {
+                    pecsleep = value;
+                    OnPropertyChange("Pecsleep");
+                }
+            }
+        }
+        private static string pecsleep;
+
+        public string Batt
+        {
+            get { return batt; }
+            set
+            {
+                if (batt != value)
+                {
+                    batt = value;
+                    OnPropertyChange("Batt");
+                }
+            }
+        }
+        private static string batt;
+
+        public string Cals
+        {
+            get { return batt; }
+            set
+            {
+                if (cals != value)
+                {
+                    cals = value;
+                    OnPropertyChange("Cals");
+                }
+            }
+        }
+        private static string cals;
+
+        public string Breath
+        {
+            get { return breath; }
+            set
+            {
+                if (breath != value)
+                {
+                    breath = value;
+                    OnPropertyChange("Breath");
+                }
+            }
+        }
+        private static string breath;
+
+
         private void StartUpdaterThread()
         {
             // Start a new thread that updates the Time property every second
@@ -155,6 +270,9 @@ namespace Portugal_2023
                     if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { TimeL = "Lisbon: " + DateTime.UtcNow.ToString("HH:mm"); } else { TimeL = "Lisbon: " + DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
                     LOC = "LOC: " + DateTime.Now.ToString("HH:mm");
                     if ((AppInfo.RequestedTheme == AppTheme.Dark)) { Bckclr = "DarkRed"; } else { Bckclr = "White"; }
+                    Day = DateTime.Now.DayOfWeek.ToString();
+                    Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
+                    if (Connectivity.NetworkAccess == NetworkAccess.Internet && !Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi)) { Data = "Data On"; } else { Data = "Data Off"; }
                     Thread.Sleep(1000);
                 }
             }).Start();
@@ -175,6 +293,27 @@ namespace Portugal_2023
                         Cbn= Convert.ToString(Math.Round(PortugalTab.flighttimer.Elapsed.TotalMinutes * 5.529, 1)) + "KG CO2";
                         
 
+                    }
+                    Thread.Sleep(1000);
+                }
+            }).Start();
+        }
+
+        public void SleepUpdateThread()
+        {
+            // Start a new thread that updates the Time property every second
+            new Thread(() =>
+            {
+                
+                while (true)
+                {
+                    if (PortugalTab.sleeptimer.IsRunning)
+                    {
+                        Sleeptime = string.Format("{0}:{1:00}", (int)(TimeSpan.FromMinutes(PortugalTab.sleeptimer.Elapsed.TotalMinutes)).TotalHours, (TimeSpan.FromMinutes(PortugalTab.sleeptimer.Elapsed.TotalMinutes)).Minutes);
+                        Pecsleep = Math.Round((PortugalTab.sleeptimer.Elapsed.TotalMinutes / 540) * 100, 0) + "%";
+                        Breath = "Breaths: " + Math.Round(15 * PortugalTab.sleeptimer.Elapsed.TotalMinutes, 0);
+                        Cals = Math.Round(0.77 * PortugalTab.sleeptimer.Elapsed.TotalMinutes, 0) + " Kcal";
+                        Batt = "Battery: " + (Battery.ChargeLevel * 100) + "%";
                     }
                     Thread.Sleep(1000);
                 }

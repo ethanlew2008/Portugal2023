@@ -42,34 +42,10 @@ namespace Portugal_2023
 
         public async void UniversialUpdate()
         {
-
             if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };
-
-            string time = "";
-            if (DateTime.UtcNow.Month > 10 || DateTime.UtcNow.Month < 3) { time = DateTime.UtcNow.ToString("HH:mm"); } else { time = DateTime.UtcNow.AddHours(1).ToString("HH:mm"); }
-
             LONWeather.Text = "London: " + clnt.intcarbLON + "°C";
-            LISWeather.Text =  "Lisbon: " + clnt.intcarb + "°C";
-
-            if (Connectivity.NetworkAccess == NetworkAccess.Internet && !Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi)) { DataOnHome.Text = "Data On"; } else { DataOnHome.Text = "Data Off"; }
-
-            DateHome.Text = DateTime.Now.DayOfWeek.ToString();
-            MonthHome.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
-
-            if (sleeptimer.IsRunning)
-            {
-                UKTimeSleep.Text = "London: " + time; PORTimeSleep.Text = "Lisbon: " + time;
-
-                TimeSlept.Text = string.Format("{0}:{1:00}", (int)(TimeSpan.FromMinutes(sleeptimer.Elapsed.TotalMinutes)).TotalHours, (TimeSpan.FromMinutes(sleeptimer.Elapsed.TotalMinutes)).Minutes);
-                PercentOfSleep.Text = Math.Round((sleeptimer.Elapsed.TotalMinutes / 540) * 100, 0) + "%";
-
-                DayOfWeek.Text = DateTime.Now.DayOfWeek.ToString();
-                BattPerSleep.Text = "Battery: " + (Battery.ChargeLevel * 100) + "%";
-
-                CaloriesBurnt.Text = Math.Round(0.77 * sleeptimer.Elapsed.TotalMinutes, 0) + " Kcal";
-                BreathsTaken.Text = "Breaths: " + Math.Round(15 * sleeptimer.Elapsed.TotalMinutes,0);
-            }
-
+            LISWeather.Text =  "Lisbon: " + clnt.intcarb + "°C";         
+            if (sleeptimer.IsRunning) { UKTimeSleep.Opacity = 1; PORTimeSleep.Opacity = 1; DayOfWeek.Opacity = 1; }
             if (Connectivity.NetworkAccess == NetworkAccess.None && !popup) { DisplayAlert("Notice", "Your Device is offline\nSome App functions may be unavailable", "OK"); LONWeather.Text = "Offline"; LISWeather.Text = "Offline"; popup = true; }
         }
 
