@@ -17,6 +17,7 @@ namespace Portugal_2023
             // Start the time updater thread when the ViewModel is created
             StartUpdaterThread();
             FlightUpdateThread();
+            SleepUpdateThread();
         }
 
 
@@ -314,6 +315,8 @@ namespace Portugal_2023
                         Breath = "Breaths: " + Math.Round(15 * PortugalTab.sleeptimer.Elapsed.TotalMinutes, 0);
                         Cals = Math.Round(0.77 * PortugalTab.sleeptimer.Elapsed.TotalMinutes, 0) + " Kcal";
                         Batt = "Battery: " + (Battery.ChargeLevel * 100) + "%";
+
+                        
                     }
                     Thread.Sleep(1000);
                 }

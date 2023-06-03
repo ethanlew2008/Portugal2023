@@ -34,19 +34,14 @@ namespace Portugal_2023
             clnt.GetGBP();            
             UniversialUpdate();          
             BindingContext = new timeVM();
-            AppVer.Text = Xamarin.Essentials.VersionTracking.CurrentVersion;          
+            AppVer.Text = Xamarin.Essentials.VersionTracking.CurrentVersion;
+            if (Connectivity.NetworkAccess == NetworkAccess.None && !popup) { DisplayAlert("Notice", "Your Device is offline\nSome App functions may be unavailable", "OK"); LONWeather.Text = "Offline"; LISWeather.Text = "Offline"; popup = true; }
         }
-
-
-       
-
         public async void UniversialUpdate()
-        {
+        {          
             if (clnt.intcarb == 0) { await clnt.GetWeather(); await clnt.GetWeatherLON(); };
             LONWeather.Text = "London: " + clnt.intcarbLON + "°C";
-            LISWeather.Text =  "Lisbon: " + clnt.intcarb + "°C";         
-            if (sleeptimer.IsRunning) { UKTimeSleep.Opacity = 1; PORTimeSleep.Opacity = 1; DayOfWeek.Opacity = 1; }
-            if (Connectivity.NetworkAccess == NetworkAccess.None && !popup) { DisplayAlert("Notice", "Your Device is offline\nSome App functions may be unavailable", "OK"); LONWeather.Text = "Offline"; LISWeather.Text = "Offline"; popup = true; }
+            LISWeather.Text = "Lisbon: " + clnt.intcarb + "°C";
         }
 
         private void StartFlight_Clicked(object sender, EventArgs e) 
@@ -57,10 +52,8 @@ namespace Portugal_2023
         private void StartSleep_Clicked(object sender, EventArgs e)
         {
             if (sleeptimer.IsRunning) { sleeptimer.Reset(); StartSleep.Source = "PortugalStartIcon"; return; }
-            else { sleeptimer.Start(); StartSleep.Source = "PortugalEndIcon"; UniversialUpdate(); }         
+            else { sleeptimer.Start(); StartSleep.Source = "PortugalEndIcon"; UniversialUpdate(); UKTimeSleep.Opacity = 1; PORTimeSleep.Opacity = 1; DayOfWeek.Opacity = 1; }         
         }
-        private void UpdateSleep_Clicked(object sender, EventArgs e) { if (sleeptimer.IsRunning) { UniversialUpdate(); } }
-        private void UpdteHome_Clicked(object sender, EventArgs e) { UniversialUpdate(); }       
         private void SOS_Clicked(object sender, EventArgs e) { try { PhoneDialer.Open("112"); } catch (Exception) { } } 
         private void CurrencyEUR_TextChanged(object sender, TextChangedEventArgs e) { try { CurrencyGBP.Text = "£" + Math.Round(Convert.ToDouble(CurrencyEUR.Text) * Convert.ToDouble(clnt.varsyr), 2);  } catch (Exception) { } }            
     }
